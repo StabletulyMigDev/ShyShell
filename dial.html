@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Windows 3.1 Dial-up Simulator</title>
+<style>
+  body {
+    background-color: #008080;
+    font-family: Arial, sans-serif;
+    color: white;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+  .window {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #c0c0c0;
+    border: 2px solid #000;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    width: 300px;
+  }
+  .window-titlebar {
+    background-color: #808080;
+    padding: 4px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    text-align: center;
+  }
+  .window-title {
+    margin: 0;
+    font-weight: bold;
+  }
+  .window-content {
+    margin-top: 10px;
+  }
+  #dialButton {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  #output {
+    margin-top: 20px;
+    font-family: monospace;
+  }
+</style>
+</head>
+<body>
+
+<div class="window">
+  <div class="window-titlebar">
+    <h2 class="window-title">Dialer</h2>
+  </div>
+  <div class="window-content">
+    <button id="dialButton" onclick="dial()">Dial</button>
+    <div id="output"></div>
+  </div>
+</div>
+
+<audio id="dialingAudio" src="dialing.mp3" preload="auto" loop></audio>
+
+<script>
+function dial() {
+  var outputDiv = document.getElementById("output");
+  outputDiv.innerHTML = "Dialing...<br>";
+  
+  var dialingAudio = document.getElementById("dialingAudio");
+
+  dialingAudio.play();
+
+  // Simulate dial-up process
+  setTimeout(function() {
+    outputDiv.innerHTML += "Connected!<br>";
+    dialingAudio.pause();
+    // Redirect to another page after connection is established
+    window.location.href = "./shell.html";
+  }, 27000); // Simulate connection time (5 seconds)
+
+  // Redirect to another page after dialing audio ends
+  dialingAudio.onended = function() {
+    window.location.href = "./shell.html";
+  };
+}
+</script>
+
+</body>
+</html>

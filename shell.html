@@ -1,0 +1,90 @@
+<!--
+    ==============================
+    =     The ShyInternet shell  =
+    =         made by Miguel V.  =
+    =       (c) 1996-%¨%$%$$#%?? =
+    ==============================
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpenDiskOS Shell</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f0f0;
+    }
+    header {
+      background-color: #333;
+      color: #fff;
+      padding: 10px 0;
+      text-align: center;
+    }
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      text-align: center;
+    }
+    p {
+      margin-bottom: 20px;
+    }
+    pre {
+      background-color: #f5f5f5;
+      padding: 10px;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Welcome to OpenDiskOS Shell</h1>
+  </header>
+  <div class="container">
+    <h2>About OpenDiskOS Shell</h2>
+    <p>OpenDiskOS Shell is a command-line interface (CLI) that provides users with access to the core functionalities of OpenDiskOS.</p>
+    <h2>Usage</h2>
+    <p>To use OpenDiskOS Shell, simply type commands into the terminal below and press Enter.</p>
+    <pre id="terminal">$&nbsp;<span id="cursor"></span></pre>
+  </div>
+  <script>
+    const terminal = document.getElementById('terminal');
+    const cursor = document.getElementById('cursor');
+
+    function typeCommand(command) {
+      const commandLine = document.createElement('div');
+      commandLine.textContent = `$ ${command}`;
+      terminal.insertBefore(commandLine, cursor);
+    }
+
+    function executeCommand(command) {
+      // Implement execution logic here
+      // This is just a placeholder function
+      console.log(`Executing command: ${command}`);
+    }
+
+    function handleKeyPress(event) {
+      if (event.key === 'Enter') {
+        const input = terminal.textContent.slice(2).trim();
+        typeCommand(input);
+        executeCommand(input);
+        terminal.textContent = '$ ';
+        terminal.appendChild(cursor);
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyPress);
+  </script>
+</body>
+</html>
